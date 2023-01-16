@@ -3,6 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { LogHistory, LogHistoryDocument } from './entities/logHistory.entity';
+import { CreateMessageDto } from './dtos/create-message.dto';
+import { mockData } from '../../data/data';
 
 @Injectable()
 export class LogHistoryService {
@@ -11,10 +13,26 @@ export class LogHistoryService {
     private readonly logHistory: Model<LogHistoryDocument>,
   ) {}
 
-  async createLogHistory(data: any): Promise<LogHistory> {
-    const logHistory = new this.logHistory(data);
-    await logHistory.save();
+  async createLogHistory(data: CreateMessageDto): Promise<LogHistory[]> {
+    const { users } = mockData;
 
-    return logHistory;
+    const userSavePromises = users.reduce((acc, user) => {
+      if (user.channels.some((channel) => data.category.includes(channel))) {
+        const userToBeSaved = {
+          ...user,
+          message: data.message,
+        };
+        const logHistory = new this.logHistory(userToBeSaved);
+        acc.push(logHistory.save());
+      }
+
+      return acc;
+    }, []);
+
+    return await Promise.all(userSavePromises);
+  }
+
+  getMessages () {
+    return this.logHistory.find()
   }
 }
