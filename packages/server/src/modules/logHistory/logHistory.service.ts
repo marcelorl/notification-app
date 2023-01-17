@@ -13,26 +13,26 @@ export class LogHistoryService {
     private readonly logHistory: Model<LogHistoryDocument>,
   ) {}
 
-  async createLogHistory(data: CreateMessageDto): Promise<LogHistory[]> {
+  async createLogHistory(data: CreateMessageDto): Promise<LogHistory> {
     const { users } = mockData;
 
-    const userSavePromises = users.reduce((acc, user) => {
+    const usersToBeSaved = users.reduce((acc, user) => {
       if (user.channels.some((channel) => data.category.includes(channel))) {
-        const userToBeSaved = {
-          ...user,
-          message: data.message,
-        };
-        const logHistory = new this.logHistory(userToBeSaved);
-        acc.push(logHistory.save());
+        acc.push(user);
       }
 
       return acc;
     }, []);
 
-    return await Promise.all(userSavePromises);
+    const logHistory = new this.logHistory({
+      users: usersToBeSaved,
+      message: data.message,
+    });
+
+    return logHistory.save();
   }
 
-  getMessages () {
-    return this.logHistory.find()
+  getMessages() {
+    return this.logHistory.find();
   }
 }

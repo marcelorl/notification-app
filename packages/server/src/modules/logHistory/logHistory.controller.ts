@@ -3,7 +3,7 @@ import { Controller, Post, Body, Get } from '@nestjs/common';
 import { LogHistoryService } from './logHistory.service';
 import { CreateMessageDto } from './dtos/create-message.dto';
 
-@Controller('/message')
+@Controller('/messages')
 export class LogHistoryController {
   constructor(private logHistoryService: LogHistoryService) {}
 
@@ -14,6 +14,6 @@ export class LogHistoryController {
 
   @Get()
   getMessages() {
-    return this.logHistoryService.getMessages()
+    return this.logHistoryService.getMessages();
   }
 }

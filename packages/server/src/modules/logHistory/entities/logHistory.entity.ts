@@ -4,7 +4,10 @@ import { Document, now } from 'mongoose';
 export type LogHistoryDocument = LogHistory & Document;
 
 @Schema()
-export class LogHistory {
+export class User {
+  @Prop(Number)
+  id: number;
+
   @Prop(String)
   name: string;
 
@@ -14,14 +17,20 @@ export class LogHistory {
   @Prop(String)
   phone: string;
 
-  @Prop(String)
-  message: string;
-
   @Prop(Array(String))
   subscribed: string[];
 
   @Prop(Array(String))
   channels: string[];
+}
+
+@Schema()
+export class LogHistory {
+  @Prop(String)
+  message: string;
+
+  @Prop(Array(User))
+  users: User[];
 
   @Prop({ default: now() })
   createdAt: Date;

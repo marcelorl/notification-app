@@ -11,3 +11,7 @@
 .form-field label {
   font-weight: bold;
 }
+
+table {
+  margin: 20px auto;
+}
