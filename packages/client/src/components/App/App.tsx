@@ -39,6 +39,7 @@ function App() {
         <div className="form-field">
           <label htmlFor="categories">Category</label>
           <select
+            value={category}
             required
             name="category"
             id="categories"
@@ -53,6 +54,7 @@ function App() {
         <div className="form-field">
           <label htmlFor="text">Message</label>
           <textarea
+            value={message}
             required
             name="message"
             id="text"
