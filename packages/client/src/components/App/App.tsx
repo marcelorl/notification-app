@@ -3,7 +3,7 @@ import "./App.css";
 import { LogHistoryTable } from "../LogHistoryTable/LogHistoryTable";
 
 const fetchMessages = () => {
-  return fetch("http://localhost:3000/messages").then((res) => res.json());
+  return fetch("http://localhost:3000/notification").then((res) => res.json());
 };
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/messages", {
+    fetch("http://localhost:3000/notification", {
       method: "POST",
       body: JSON.stringify({ category, message }),
       headers: { "Content-Type": "application/json" },

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { LogHistoryService } from './logHistory.service';
+import { NotificationService } from './notification.service';
 import { LogHistory, LogHistorySchema } from './entities/logHistory.entity';
-import { LogHistoryController } from './logHistory.controller';
+import { NotificationController } from './notification.controller';
 
 @Module({
   imports: [
@@ -11,7 +11,7 @@ import { LogHistoryController } from './logHistory.controller';
       { name: LogHistory.name, useFactory: () => LogHistorySchema },
     ]),
   ],
-  controllers: [LogHistoryController],
-  providers: [LogHistoryService],
+  controllers: [NotificationController],
+  providers: [NotificationService],
 })
-export class LogHistoryModule {}
+export class NotificationModule {}

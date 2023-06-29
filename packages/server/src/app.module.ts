@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import configuration from './modules/config/configuration';
-import { LogHistoryModule } from './modules/logHistory/logHistory.module';
+import { NotificationModule } from './modules/notification/notification.module';
 
 @Module({
   imports: [
@@ -15,7 +15,7 @@ import { LogHistoryModule } from './modules/logHistory/logHistory.module';
       }),
       inject: [ConfigService],
     }),
-    LogHistoryModule,
+    NotificationModule,
   ],
 })
 export class AppModule {}

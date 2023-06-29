@@ -5,15 +5,16 @@ import { Model } from 'mongoose';
 import { LogHistory, LogHistoryDocument } from './entities/logHistory.entity';
 import { CreateMessageDto } from './dtos/create-message.dto';
 import { mockData } from '../../data/data';
+import { Notification } from './engines/notification';
 
 @Injectable()
-export class LogHistoryService {
+export class NotificationService {
   constructor(
     @InjectModel(LogHistory.name)
     private readonly logHistory: Model<LogHistoryDocument>,
   ) {}
 
-  async createLogHistory(data: CreateMessageDto): Promise<LogHistory> {
+  async notify(data: CreateMessageDto): Promise<LogHistory> {
     const { users } = mockData;
 
     const usersToBeSaved = users.reduce((acc, user) => {
@@ -23,6 +24,11 @@ export class LogHistoryService {
 
       return acc;
     }, []);
+
+    new Notification().notify({
+      users: usersToBeSaved,
+      message: data.message,
+    });
 
     const logHistory = new this.logHistory({
       users: usersToBeSaved,
