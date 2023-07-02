@@ -1,7 +1,8 @@
 # Notification App
 
 ## Installation
-```
+```shell
+$ pnpm install
 $ docker-compose up --build
 ```
 
@@ -13,6 +14,12 @@ You`ll have 2 ports opened to work:
 
 Please, open http://localhost:5173 and start using the app.
 
+## Tests
+
+```shell
+$ pnpm test
+```
+
 ## Technologies
 
  - PNPM
@@ -23,3 +30,4 @@ Please, open http://localhost:5173 and start using the app.
  - Nestjs
  - Docker
  - Mongodb
+ - Jest

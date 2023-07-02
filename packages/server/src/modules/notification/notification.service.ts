@@ -30,12 +30,10 @@ export class NotificationService {
       message: data.message,
     });
 
-    const logHistory = new this.logHistory({
+    return this.logHistory.create({
       users: usersToBeSaved,
       message: data.message,
     });
-
-    return logHistory.save();
   }
 
   getMessages() {
