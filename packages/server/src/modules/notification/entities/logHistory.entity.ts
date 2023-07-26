@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, now } from 'mongoose';
 
+import { Channel, EngineType } from '../types/general.type';
+
 export type LogHistoryDocument = LogHistory & Document;
 
 @Schema()
@@ -18,10 +20,10 @@ export class User {
   phone: string;
 
   @Prop(Array(String))
-  subscribed: string[];
+  subscribed: EngineType[];
 
   @Prop(Array(String))
-  channels: string[];
+  channels: Channel[];
 }
 
 @Schema()

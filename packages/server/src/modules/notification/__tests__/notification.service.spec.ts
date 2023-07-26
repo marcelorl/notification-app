@@ -5,7 +5,7 @@ import { LogHistory, LogHistoryDocument } from '../entities/logHistory.entity';
 import { getModelToken } from '@nestjs/mongoose';
 import { NotificationService } from '../notification.service';
 
-describe('', () => {
+describe('#Notification', () => {
   let service: NotificationService;
   let mockLogHistoryModel = Model<LogHistoryDocument>;
 

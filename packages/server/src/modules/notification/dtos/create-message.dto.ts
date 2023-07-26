@@ -1,11 +1,13 @@
 import { IsDefined, IsString } from 'class-validator';
 
-export class CreateMessageDto {
-    @IsString()
-    @IsDefined()
-    category: string;
+import { Channel } from '../types/general.type';
 
-    @IsString()
-    @IsDefined()
-    message: string;
+export class CreateMessageDto {
+  @IsString()
+  @IsDefined()
+  category: Channel;
+
+  @IsString()
+  @IsDefined()
+  message: string;
 }

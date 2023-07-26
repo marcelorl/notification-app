@@ -1,21 +1,16 @@
-import { Sms } from './sms';
-import { Email } from './email';
-import { Push } from './push';
 import { User } from '../entities/logHistory.entity';
+import { NotificationEngine } from '../types/general.type';
 
 export class Notification {
-  engines = {
-    sms: Sms,
-    email: Email,
-    push: Push,
-  };
+  private strategy: NotificationEngine;
 
-  notify(data: { message: string; users: User[] }) {
-    data.users.forEach((user) => {
-      user.subscribed.forEach((type) => {
-        const notifierService = new this.engines[type]();
-        notifierService.send(data.message, user.name);
-      });
+  constructor(strategy: NotificationEngine) {
+    this.strategy = strategy;
+  }
+
+  notify(data: { message: string; user: User }): void {
+    data.user.subscribed.map(() => {
+      return this.strategy.send(data.message, data.user.name);
     });
   }
 }
